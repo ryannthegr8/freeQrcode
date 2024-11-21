@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>QR Code Generator</title>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/styles.css') }}"
+    />
+  </head>
+  <body>
+    <div class="toggle-container">
+      <div class="toggle-button">
+        <div class="toggle-circle"></div>
+      </div>
+    </div>
+
+    <!-- menu -->
+    <div class="menu-container">
+      <button class="menu-button">Menu</button>
+      <div class="menu-dropdown">
+        <a href="{{ url_for('dashboard') }}">Dashboard</a>
+        <a href="{{ url_for('home') }}">Home</a>
+        <a href="{{ url_for('logout') }}">Logout</a>
+      </div>
+    </div>
+
+    <div class="container">
+      <div class="card">
+        <h1>QR Code Generator</h1>
+        <form action="/generate" method="POST">
+          <input type="text" name="text" placeholder="Enter text" required />
+          <button type="submit">Generate QR Code</button>
+        </form>
+      </div>
+
+      <br />
+
+      <p>
+        See Your QRcodes
+        <a href="{{ url_for('dashboard') }}">Go to Dashboard</a>
+      </p>
+      <p>
+        Exit Account {% if current_user.is_authenticated %}
+        <a href="{{ url_for('logout') }}">Logout</a>
+        {% else %}
+        <a href="{{ url_for('login') }}">Login</a>
+        <a href="{{ url_for('signup') }}">Sign Up</a>
+        {% endif %}
+      </p>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/scripts.js') }}"></script>
+  </body>
+</html>

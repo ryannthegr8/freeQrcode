@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dashboard</title>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/styles.css') }}"
+    />
+  </head>
+  <body>
+    <div class="toggle-container">
+      <div class="toggle-button">
+        <div class="toggle-circle"></div>
+      </div>
+    </div>
+    <!-- menu -->
+    <div class="menu-container">
+      <button class="menu-button">≡</button>
+      <div class="menu-dropdown">
+        <a href="{{ url_for('dashboard') }}">Dashboard</a>
+        <a href="{{ url_for('home') }}">Home</a>
+        <a href="{{ url_for('logout') }}">Logout</a>
+      </div>
+    </div>
+
+    <div class="container2">
+      <div class="card2">
+        <h1>Your QR Codes</h1>
+        <table>
+          <thead>
+            <tr>
+              <th>Text</th>
+              <th>QR Code</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for qr_code in qr_codes %}
+            <tr>
+              <td>{{ qr_code.text }}</td>
+              <td>
+                <img
+                  class="image-view"
+                  src="{{ url_for('static', filename='qr_codes/' + qr_code.qr_file) }}"
+                  width="100"
+                  alt="QR Code"
+                />
+              </td>
+              <td>
+                <div class="actions">
+                  <a
+                    class="btn btn-download"
+                    href="{{ url_for('download', qr_id=qr_code.id) }}"
+                    >Download</a
+                  >
+                  <a
+                    class="btn btn-edit"
+                    href="{{ url_for('edit', qr_id=qr_code.id) }}"
+                    >Edit</a
+                  >
+                  <a
+                    class="btn btn-delete"
+                    href="{{ url_for('delete', qr_id=qr_code.id) }}"
+                    >Delete</a
+                  >
+                </div>
+              </td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/scripts.js') }}"></script>
+  </body>
+</html>
