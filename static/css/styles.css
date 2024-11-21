@@ -195,7 +195,7 @@ table tr:nth-child(odd) {
 .menu-container {
   position: absolute;
   top: 10px;
-  left: 60px;
+  left: 10px;
 }
 
 .menu-button {
