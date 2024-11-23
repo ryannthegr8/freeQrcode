@@ -42,7 +42,7 @@ def generate_qr():
     text = request.form.get('text')
     if text:
         img = qrcode.make(text)
-        filename = f'{text[:10]}_qr.png'
+        filename = f'{text[:3]}_qr.png'
     file_path = os.path.join(app.config['UPLOAD_FOLDER'], filename)
     img.save(file_path)
 
